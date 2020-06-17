@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 print
 print "checking for nltk"
 try:
