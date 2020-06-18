@@ -36,13 +36,17 @@ from sklearn.metrics import accuracy_score
 clf = GaussianNB()
 
 ### fit the classifier on the training features and labels
+t0 = time()
 clf.fit(features_train, labels_train)
+print("training time:", round(time()-t0, 3), "s")
 
 ### use the trained classifier to predict labels for the test features
+t1 = time()
 pred = clf.predict(features_test)
+print("testing time:", round(time()-t1, 3), "s")
 
 score = accuracy_score(labels_test, pred)
-print(score)
+print("accuracy:", score)
 #########################################################
 
 
