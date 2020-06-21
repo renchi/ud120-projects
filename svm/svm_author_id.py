@@ -29,29 +29,30 @@ features_train, features_test, labels_train, labels_test = preprocess()
 #########################################################
 ### your code goes here ###
 
-#clf = svm.SVC(kernel="linear")
-clf = svm.SVC(C=10000.0)
+for this_C in [1,10,100,1000,10000]:
+    #clf = svm.SVC(kernel="linear")
+    clf = svm.SVC(C=this_C)
 
-### fit the classifier on the training features and labels
-#print("training started")
-#t0 = time()
-clf.fit(features_train, labels_train)
-#print("training time:", round(time()-t0, 3), "s")
+    ### fit the classifier on the training features and labels
+    #print("training started")
+    #t0 = time()
+    clf.fit(features_train, labels_train)
+    #print("training time:", round(time()-t0, 3), "s")
 
-### use the trained classifier to predict labels for the test features
-#print("test started")
-#t1 = time()
-pred = clf.predict(features_test)
-#print("testing time:", round(time()-t1, 3), "s")
+    ### use the trained classifier to predict labels for the test features
+    #print("test started")
+    #t1 = time()
+    pred = clf.predict(features_test)
+    #print("testing time:", round(time()-t1, 3), "s")
 
-acc = accuracy_score(pred, labels_test)
-print("SVM Accuracy is {} ".format(acc))
-#print("Predictions are {}, {}, {}".format(c[10], pred[26], pred[50]))
+    scoretest = accuracy_score(pred, labels_test)
+    #print("SVM Accuracy is {} ".format(scoretest))
 
-### Number of predicted as "Chris" (1) class
-num_ones = (pred == 1).sum()
-print("Chris prediction count = {}".format(np.sum(pred == 1)));
-print("Sara prediction count = {}".format(np.sum(pred == 0)));
+    ### Number of predicted as "Chris" (1) class
+    #print("Chris prediction count = {}".format(np.sum(pred == 1)));
+    #print("Sara prediction count = {}".format(np.sum(pred == 0)));
+    print("Linear SVM value of C:{}, Test Score: {:2f} \n".format(this_C,scoretest))
+
 #########################################################
 
 
