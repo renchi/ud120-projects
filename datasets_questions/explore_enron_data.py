@@ -19,12 +19,12 @@ import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "rb"))
 
-# Total data points. Answer is 146
-print(len(enron_data))
+print("Total data points = {}".format(len(enron_data)))
 
 # Count of features available for each person. Answer is 21.
 for data in enron_data.values():
-    print(len(data))
+    print("Features available for each person = {}".format(len(data)))
+    break
 
 # Numbers of POI in the data set. Answer is 18
 poi_count = 0
@@ -32,9 +32,15 @@ for data in enron_data.values():
     for key, value in data.items():
         if (key == 'poi' and value == 1):
             poi_count += 1
-print (poi_count)
+print("POIs in final_project_dataset.pkl = {}".format(poi_count))
 
-
-
-
+# Count of POIs in poi_names.txt
+poi_count = 0
+poi_names_file = open("../final_project/poi_names.txt", "r") # Open as text file, so use "r" not "rb"
+list_of_names = poi_names_file.readlines()
+poi_names_file.close();
+for name in list_of_names:
+    if name.find('(y)') == 0 or name.find('(n)') == 0:
+        poi_count += 1
+print("POIs in poi_names.txt = {}".format(poi_count))
 
