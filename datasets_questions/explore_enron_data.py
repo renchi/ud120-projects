@@ -66,4 +66,27 @@ for key in enron_data.keys():
         stock_options_exercised = enron_data[key]['exercised_stock_options']
         print("Value of stock options exercised by {}= {}".format(key,stock_options_exercised ))
 
+# who took home the most money
+lookupNameArray = ["Skilling", "Fastow", "Lay"]
+for key in enron_data.keys():
+    total_payments = 0
+    if re.search(lookupNameArray[0], key, re.IGNORECASE):
+        total_payments = enron_data[key]['total_payments']
+    elif re.search(lookupNameArray[1], key, re.IGNORECASE):
+        total_payments = enron_data[key]['total_payments']
+    elif re.search(lookupNameArray[2], key, re.IGNORECASE):
+        total_payments = enron_data[key]['total_payments']
 
+    if total_payments > 0:
+        print("{} took {} million".format(key,float(total_payments)/1000000))
+
+# How many folks in this dataset have a quantified salary? What about a known email address?
+have_salary = 0
+have_email_address = 0
+for data in enron_data.values():
+    for key, value in data.items():
+        if key == 'salary' and value != 'NaN' and int(value) > 0:
+           have_salary += 1
+        elif key == 'email_address' and value != 'NaN':
+            have_email_address += 1
+print("Folks that have a quantified salary= {}; email_address = {}".format(have_salary, have_email_address))
