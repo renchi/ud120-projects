@@ -20,7 +20,8 @@ import re
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "rb"))
 
-print("Total data points = {}".format(len(enron_data)))
+enron_data_count = len(enron_data)
+print("Total data points = {}".format(enron_data_count))
 
 # Count of features available for each person. Answer is 21.
 for data in enron_data.values():
@@ -90,3 +91,32 @@ for data in enron_data.values():
         elif key == 'email_address' and value != 'NaN':
             have_email_address += 1
 print("Folks that have a quantified salary= {}; email_address = {}".format(have_salary, have_email_address))
+
+# Percentage of people that have NaN in total payments
+count_of_nan_payment = 0
+for data in enron_data.values():
+    for key, value in data.items():
+        if key == 'total_payments' and value == 'NaN':
+           count_of_nan_payment += 1
+
+percent_of_nan_payment = (count_of_nan_payment/enron_data_count) * 100
+print ("People that have NaN in total payments is {} %".format(percent_of_nan_payment))
+
+# Percentage of POI that have NaN in total payments
+count_of_poi_nan_payment = 0
+for data in enron_data.values():
+    for key, value in data.items():
+        if key == 'poi' and value == 1:
+            if data['total_payments'] == 'NaN':
+                count_of_poi_nan_payment += 1
+
+percent_of_poi_nan_payment = (count_of_poi_nan_payment/poi_count) * 100
+print ("POI that have NaN in total payments is {} %".format(percent_of_poi_nan_payment))
+
+'''
+count_of_nan_payment += 10
+enron_data_count += 10
+percent_of_nan_payment = (count_of_nan_payment/enron_data_count) * 100
+print ("enron_data_count {} count_of_nan_payment {} percent_of_nan_payment {}"
+       .format(enron_data_count, count_of_nan_payment, percent_of_nan_payment))
+'''
