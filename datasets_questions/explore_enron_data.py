@@ -44,3 +44,9 @@ for name in list_of_names:
         poi_count += 1
 print("POIs in poi_names.txt = {}".format(poi_count))
 
+# total value of the stock belonging to James Prentice:
+lookupName = "PRENTICE JAMES"
+for key in enron_data.keys():
+    if str(key).find(lookupName) == 0:
+        total_stock_value = enron_data[key]['total_stock_value']
+        print("Total stock value of {} = {}".format(lookupName,total_stock_value ))
