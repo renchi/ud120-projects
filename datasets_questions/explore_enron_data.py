@@ -16,6 +16,7 @@
 """
 
 import pickle
+import re
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "rb"))
 
@@ -45,8 +46,24 @@ for name in list_of_names:
 print("POIs in poi_names.txt = {}".format(poi_count))
 
 # total value of the stock belonging to James Prentice:
-lookupName = "PRENTICE JAMES"
+lookupName = "Prentice James"
 for key in enron_data.keys():
-    if str(key).find(lookupName) == 0:
+    if re.search(lookupName, key, re.IGNORECASE):
         total_stock_value = enron_data[key]['total_stock_value']
-        print("Total stock value of {} = {}".format(lookupName,total_stock_value ))
+        print("Total stock value of {} = {}".format(key,total_stock_value ))
+
+# How many email messages do we have from Wesley Colwell to persons of interest?
+lookupName = "Colwell Wesley"
+for key in enron_data.keys():
+    if re.search(lookupName, key, re.IGNORECASE):
+        count_of_email_to_poi = enron_data[key]['from_this_person_to_poi']
+        print("Email count from {} to POI = {}".format(key,count_of_email_to_poi ))
+
+# What’s the value of stock options exercised by Jeffrey K Skilling?
+lookupName = "Skilling Jeffrey"
+for key in enron_data.keys():
+    if re.search(lookupName, key, re.IGNORECASE):
+        stock_options_exercised = enron_data[key]['exercised_stock_options']
+        print("Value of stock options exercised by {}= {}".format(key,stock_options_exercised ))
+
+
