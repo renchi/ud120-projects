@@ -11,3 +11,4 @@ my_feature_list.pkl
 /venv/
 /.idea
 test.png
+/k_means/clusters.pdf
